@@ -1,0 +1,12 @@
+# Configuración local con credenciales (ver config.example.php)
+config.local.php
+.env
+
+# Dependencias de Composer (se instalan con composer install)
+extensiones/vendor/
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

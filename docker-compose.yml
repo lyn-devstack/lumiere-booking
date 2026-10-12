@@ -1,0 +1,38 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_NAME: lumiere_studio
+      DB_USER: lumiere
+      DB_PASS: lumiere
+      BASE_URL: http://localhost:8080/
+      MAIL_FROM: no-reply@lumiere.local
+      MAIL_CONTACT: contacto@lumiere.local
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: lumiere_studio
+      MARIADB_USER: lumiere
+      MARIADB_PASSWORD: lumiere
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 20
+
+  # Bandeja de correo de pruebas: los emails de verificación y recuperación se ven en http://localhost:8025
+  mailpit:
+    image: axllent/mailpit:v1.20
+    ports:
+      - "8025:8025"
