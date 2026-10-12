@@ -6,7 +6,7 @@ Final project of my **Web Application Development degree (DAW, 2022)**, built in
 
 > The user interface is in Spanish.
 
-![Home page](docs/home.jpg)
+![Walkthrough: public site, booking, customer area and admin panel](docs/demo.gif)
 
 ## Features
 

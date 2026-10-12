@@ -1,4 +1,8 @@
 <?php
+// El HTML se acumula en un búfer: así los controladores pueden regenerar la sesión
+// (session_regenerate_id) aunque se ejecuten a mitad de la plantilla
+ob_start();
+
 session_start();
 
 $ruta = ControladorRuta::ctrRuta();
